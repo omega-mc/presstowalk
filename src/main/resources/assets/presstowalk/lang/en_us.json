@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.presstowalk.option.forceSprint": "Force Sprint",
+  "text.autoconfig.presstowalk.title": "Press To Walk",
+  "text.autoconfig.presstowalk.category.default": "Main",
+  "key.presstowalk.walk": "Toggle Walking",
+  "presstowalk.category": "Press To Walk"
+}
