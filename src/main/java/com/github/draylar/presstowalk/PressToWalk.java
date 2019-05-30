@@ -1,6 +1,7 @@
 package com.github.draylar.presstowalk;
 
 import com.github.draylar.presstowalk.config.PressToWalkConfig;
+import com.github.draylar.presstowalk.mixin.KeyCodeAccessor;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
@@ -30,6 +31,8 @@ public class PressToWalk implements ClientModInitializer
 
 	private static void registerKeybindings()
 	{
+		MinecraftClient client = MinecraftClient.getInstance();
+
 		// set up keybinding
 		keyBinding = FabricKeyBinding.Builder.create(
 				new Identifier("presstowalk", "walk"),
@@ -51,22 +54,27 @@ public class PressToWalk implements ClientModInitializer
 						// reset walking/sprinting if we just turned it off
 						if(isWalking == false)
 						{
-							KeyBinding.setKeyPressed(MinecraftClient.getInstance().options.keyForward.getDefaultKeyCode(), false);
-							KeyBinding.setKeyPressed(MinecraftClient.getInstance().options.keySprint.getDefaultKeyCode(), false);
+							KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keyForward), false);
+							KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keySprint), false);
 						}
 					}
 
 					if(isWalking)
 					{
-						KeyBinding.setKeyPressed(MinecraftClient.getInstance().options.keyForward.getDefaultKeyCode(), true);
+						KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keyForward), true);
 
 						// force sprint if the config option is toggled on
 						if(config.forceSprint)
 						{
-							KeyBinding.setKeyPressed(MinecraftClient.getInstance().options.keySprint.getDefaultKeyCode(), true);
+							KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keySprint), true);
 						}
 					}
 				}
 		);
+	}
+
+	private static InputUtil.KeyCode getConfiguredKeyCode(KeyBinding keyBinding)
+	{
+		return((KeyCodeAccessor) keyBinding).getConfiguredKeyCode();
 	}
 }

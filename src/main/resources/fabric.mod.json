@@ -26,6 +26,9 @@
       "com.github.draylar.presstowalk.config.ModMenuIntegration"
     ]
   },
+  "mixins": [
+    "presstowalk.mixins.json"
+  ],
   "requires": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
