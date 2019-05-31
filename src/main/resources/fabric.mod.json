@@ -2,7 +2,7 @@
 {
   "schemaVersion": 1,
   "id": "presstowalk",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "name": "Press To Walk",
   "description": "Adds a key-bind for auto-walking.",

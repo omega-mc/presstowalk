@@ -9,8 +9,8 @@ import org.lwjgl.glfw.GLFW;
 
 public class Keybinds
 {
-    public static FabricKeyBinding autoWalk;
-    public static FabricKeyBinding autoMine;
+    static FabricKeyBinding autoWalk;
+    static FabricKeyBinding autoMine;
 
     public static void init()
     {
@@ -20,7 +20,6 @@ public class Keybinds
 
     private static void initKeybinds()
     {
-        // set up keybinding
         autoWalk = FabricKeyBinding.Builder.create(
                 new Identifier("presstowalk", "walk"),
                 InputUtil.Type.KEYSYM,
@@ -31,7 +30,7 @@ public class Keybinds
         autoMine = FabricKeyBinding.Builder.create(
                 new Identifier("presstowalk", "mine"),
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_RELEASE_BEHAVIOR_NONE,
+                GLFW.GLFW_KEY_M,
                 new TranslatableComponent("presstowalk.category").getText()
         ).build();
     }

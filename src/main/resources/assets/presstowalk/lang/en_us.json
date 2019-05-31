@@ -3,5 +3,8 @@
   "text.autoconfig.presstowalk.title": "Press To Walk",
   "text.autoconfig.presstowalk.category.default": "Main",
   "key.presstowalk.walk": "Toggle Walking",
-  "presstowalk.category": "Press To Walk"
+  "presstowalk.category": "Press To Walk",
+  "key.presstowalk.mine": "Toggle Mining Mode",
+  "presstowalk.mining.on": "Mining Mode toggled on!",
+  "presstowalk.mining.off": "Mining Mode toggled off!"
 }

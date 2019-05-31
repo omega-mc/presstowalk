@@ -4,6 +4,8 @@ import com.github.draylar.presstowalk.PressToWalk;
 import com.github.draylar.presstowalk.mixin.KeyCodeAccessor;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.options.KeyBinding;
@@ -27,8 +29,17 @@ public class KeybindHandlers
                 {
                     handleAutoWalk();
                     handleAutoMine();
+                    handleForcedResets();
                 }
         );
+    }
+
+    private static void handleForcedResets()
+    {
+        if(client.options.keyForward.wasPressed())
+        {
+            isWalking = false;
+        }
     }
 
     private static void handleAutoWalk()
@@ -58,32 +69,22 @@ public class KeybindHandlers
                     // make sure we're not falling off a cliff
                     BlockPos offset = player.getBlockPos().offset(player.getHorizontalFacing()).offset(Direction.DOWN);
                     BlockState state = world.getBlockState(offset);
-                    System.out.println(state);
-                    if(!state.isAir())
+                    if(!state.isAir() && !(state.getBlock() == Blocks.LAVA) && !(state.getBlock() == Blocks.WATER))
                     {
                         // don't hit our head
                         if(world.getBlockState(player.getBlockPos().offset(Direction.UP).offset(player.getHorizontalFacing(), 2)).isAir())
                         {
                             KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keyForward), true);
-                            return;
                         }
 
-                        else
-                        {
-                            resetPressedKeys();
-                        }
+                        else resetPressedKeys();
                     }
 
-                    else
-                    {
-                        resetPressedKeys();
-                    }
+                    else resetPressedKeys();
+
                 }
 
-                else
-                {
-                    resetPressedKeys();
-                }
+                else resetPressedKeys();
             }
 
             else
@@ -107,12 +108,12 @@ public class KeybindHandlers
 
             if(isMining)
             {
-                client.player.sendChatMessage(new TranslatableComponent("presstowalk.mining.on").getText());
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.mining.on"), false);
             }
 
             else
             {
-                client.player.sendChatMessage(new TranslatableComponent("presstowalk.mining.off").getText());
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.mining.off"), false);
             }
         }
     }
