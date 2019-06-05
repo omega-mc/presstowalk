@@ -10,9 +10,12 @@
     "Draylar"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://minecraft.curseforge.com/projects/press-to-walk",
+    "sources": "https://github.com/Draylar/presstowalk"
   },
+  "contributors" : [
+    "XuyuEre"
+  ],
 
   "license": "MIT",
   "icon": "assets/presstowalk/icon.png",

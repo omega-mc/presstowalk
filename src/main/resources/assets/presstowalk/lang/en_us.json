@@ -5,6 +5,8 @@
   "key.presstowalk.walk": "Toggle Walking",
   "presstowalk.category": "Press To Walk",
   "key.presstowalk.mine": "Toggle Mining Mode",
-  "presstowalk.mining.on": "Mining Mode toggled on!",
-  "presstowalk.mining.off": "Mining Mode toggled off!"
+  "presstowalk.mining.on": "Mining Mode toggled §aon!",
+  "presstowalk.mining.off": "Mining Mode toggled §coff!",
+  "presstowalk.autowalkstarted": "Auto Walk §astarted",
+  "presstowalk.autowalkstopped": "Auto Walk §cstopped"
 }

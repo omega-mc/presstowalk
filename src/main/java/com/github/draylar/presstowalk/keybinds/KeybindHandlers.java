@@ -36,8 +36,25 @@ public class KeybindHandlers
 
     private static void handleForcedResets()
     {
+        if(client.options.keyBack.wasPressed())
+        {
+            if(isWalking)
+            {
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.autowalkstopped"), true);
+                KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keyForward), false);
+            }
+
+            isWalking = false;
+        }
+
         if(client.options.keyForward.wasPressed())
         {
+            if(isWalking)
+            {
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.autowalkstopped"), true);
+                KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keyForward), false);
+            }
+
             isWalking = false;
         }
     }
@@ -48,10 +65,16 @@ public class KeybindHandlers
         {
             isWalking = !isWalking;
 
+            if(isWalking)
+            {
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.autowalkstarted"), true);
+            }
+
             // reset walking/sprinting if we just turned it off
-            if(isWalking == false)
+            if(!isWalking)
             {
                 resetPressedKeys();
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.autowalkstopped"), true);
             }
         }
 
@@ -69,7 +92,7 @@ public class KeybindHandlers
                     // make sure we're not falling off a cliff
                     BlockPos offset = player.getBlockPos().offset(player.getHorizontalFacing()).offset(Direction.DOWN);
                     BlockState state = world.getBlockState(offset);
-                    if(!state.isAir() && !(state.getBlock() == Blocks.LAVA) && !(state.getBlock() == Blocks.WATER))
+                    if(!state.isAir() && !isLiquid(state))
                     {
                         // don't hit our head
                         if(world.getBlockState(player.getBlockPos().offset(Direction.UP).offset(player.getHorizontalFacing(), 2)).isAir())
@@ -108,12 +131,12 @@ public class KeybindHandlers
 
             if(isMining)
             {
-                client.player.addChatMessage(new TranslatableComponent("presstowalk.mining.on"), false);
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.mining.on"), true);
             }
 
             else
             {
-                client.player.addChatMessage(new TranslatableComponent("presstowalk.mining.off"), false);
+                client.player.addChatMessage(new TranslatableComponent("presstowalk.mining.off"), true);
             }
         }
     }
@@ -122,6 +145,10 @@ public class KeybindHandlers
     {
         KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keyForward), false);
         KeyBinding.setKeyPressed(getConfiguredKeyCode(client.options.keySprint), false);
+    }
+
+    public static boolean isLiquid(BlockState state) {
+        return (state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.LAVA);
     }
 
     /**
