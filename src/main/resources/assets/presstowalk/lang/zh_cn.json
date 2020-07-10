@@ -2,6 +2,6 @@
   "text.autoconfig.presstowalk.option.forceSprint": "强制冲刺",
   "text.autoconfig.presstowalk.title": "按下走路",
   "text.autoconfig.presstowalk.category.default": "主要",
-  "key.presstowalk.walk": "切换行走",
+  "presstowalk.walk": "切换行走",
   "presstowalk.category": "按下走路"
 }

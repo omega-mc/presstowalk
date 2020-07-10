@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "com.github.draylar.presstowalk.mixin",
+  "package": "draylar.presstowalk.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "KeyCodeAccessor"
+
   ],
   "injectors": {
     "defaultRequire": 1

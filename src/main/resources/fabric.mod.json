@@ -2,7 +2,7 @@
 {
   "schemaVersion": 1,
   "id": "presstowalk",
-  "version": "1.0.2",
+  "version": "${version}",
 
   "name": "Press To Walk",
   "description": "Adds a key-bind for auto-walking.",
@@ -20,13 +20,13 @@
   "license": "MIT",
   "icon": "assets/presstowalk/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
-      "com.github.draylar.presstowalk.PressToWalk"
+      "draylar.presstowalk.PressToWalk"
     ],
     "modmenu": [
-      "com.github.draylar.presstowalk.config.ModMenuIntegration"
+      "draylar.presstowalk.config.ModMenuIntegration"
     ]
   },
   "mixins": [
